@@ -1,0 +1,1283 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap');
+
+  /* ─── Design Tokens ─────────────────────────────────────────── */
+  :root {
+    --brand: #1659A8;
+    --brand-mid: #1d6bbf;
+    --brand-lite: #EEF5FF;
+    --brand-glow: rgba(22, 89, 168, .18);
+    --ink: #0D1117;
+    --ink-2: #374151;
+    --ink-3: #6B7280;
+    --ink-4: #9CA3AF;
+    --border: #E8EBF0;
+    --surface: #FFFFFF;
+    --surface-2: #F7F9FC;
+    --radius-card: 16px;
+    --radius-pill: 100px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04);
+    --shadow-brand: 0 8px 24px var(--brand-glow);
+    --transition: all .22s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  /* ─── Section Wrapper ───────────────────────────────────────── */
+  .po-section {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 72px 0 80px;
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  /* Subtle geometric background */
+  .po-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 50%, rgba(22, 89, 168, .04) 0%, transparent 50%),
+      radial-gradient(circle at 85% 20%, rgba(22, 89, 168, .05) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .po-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Section Header ────────────────────────────────────────── */
+  .po-header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+
+  .po-site-logo {
+    height: 79px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 24px;
+  }
+
+  .po-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--brand-lite);
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 20px;
+  }
+
+  .po-eyebrow svg {
+    flex-shrink: 0;
+  }
+
+  .po-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(30px, 5vw, 46px);
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 14px;
+  }
+
+  .po-title span {
+    color: var(--brand);
+    position: relative;
+  }
+
+  .po-title span::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--brand);
+    border-radius: 2px;
+    opacity: .25;
+  }
+
+  .po-subtitle {
+    color: var(--ink-3);
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 440px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  /* ─── Tab Strip ─────────────────────────────────────────────── */
+  .po-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .po-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-3);
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .po-tab img {
+    height: 26px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(30%);
+    transition: filter .2s;
+  }
+
+  .po-tab:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    background: var(--brand-lite);
+  }
+
+  .po-tab.active {
+    border-color: var(--brand);
+    background: var(--brand);
+    color: #fff;
+    box-shadow: var(--shadow-brand);
+  }
+
+  .po-tab.active img {
+    filter: brightness(0) invert(1);
+  }
+
+  /* ─── Main Card ─────────────────────────────────────────────── */
+  .po-card {
+    background: var(--surface);
+    border-radius: 24px;
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ─── Card Header ───────────────────────────────────────────── */
+  .po-card-head {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: var(--surface-2);
+  }
+
+  .po-card-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .po-card-brand-logo {
+    width: 72px;
+    height: 46px;
+    object-fit: contain;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px 10px;
+  }
+
+  .po-card-brand-text h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 3px;
+  }
+
+  .po-card-brand-text p {
+    font-size: 12.5px;
+    color: var(--ink-4);
+    margin: 0;
+  }
+
+  /* Count badge */
+  .po-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--brand-lite);
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+  }
+
+  /* Search */
+  .po-search-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .po-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-4);
+    pointer-events: none;
+  }
+
+  .po-search {
+    padding: 9px 14px 9px 38px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    outline: none;
+    width: 210px;
+    transition: var(--transition);
+  }
+
+  .po-search::placeholder {
+    color: var(--ink-4);
+  }
+
+  .po-search:focus {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-glow);
+  }
+
+  /* ─── Bank Grid ─────────────────────────────────────────────── */
+  .po-body {
+    padding: 28px;
+    max-height: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .po-body::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .po-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .po-body::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 99px;
+  }
+
+  .po-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+  }
+
+  .po-bank-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--surface);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    animation: poFadeUp .4s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .po-bank-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--brand-lite), transparent);
+    opacity: 0;
+    transition: opacity .22s;
+  }
+
+  .po-bank-card:hover {
+    border-color: var(--brand);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-brand);
+  }
+
+  .po-bank-card:hover::before {
+    opacity: 1;
+  }
+
+  .po-bank-card:active {
+    transform: translateY(-1px);
+  }
+
+  .po-bank-img-wrap {
+    width: 205px;
+    height: 147px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .po-bank-img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform .22s;
+  }
+
+  .po-bank-card:hover .po-bank-img-wrap img {
+    transform: scale(1.06);
+  }
+
+  .po-bank-label {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink-3);
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    transition: color .2s;
+  }
+
+  .po-bank-card:hover .po-bank-label {
+    color: var(--brand);
+  }
+
+  .po-bank-arrow {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: var(--brand);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(.6);
+    transition: var(--transition);
+    z-index: 1;
+  }
+
+  .po-bank-card:hover .po-bank-arrow {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* No-results */
+  .po-empty {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px;
+    color: var(--ink-4);
+    gap: 14px;
+    text-align: center;
+  }
+
+  .po-empty-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--surface-2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--border);
+  }
+
+  .po-empty p {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .po-empty span {
+    color: var(--ink);
+  }
+
+  /* ─── Steps Screen ──────────────────────────────────────────── */
+  .po-steps-screen {
+    display: none;
+  }
+
+  .po-steps-topbar {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--surface-2);
+    flex-wrap: wrap;
+  }
+
+  .po-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .po-back-btn:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+    background: var(--brand-lite);
+  }
+
+  .po-steps-bank-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .po-steps-bank-logo-wrap {
+    width: 80px;
+    height: 52px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .po-steps-bank-logo-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .po-steps-bank-text h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 3px;
+  }
+
+  .po-steps-bank-text p {
+    font-size: 12.5px;
+    color: var(--ink-4);
+    margin: 0;
+  }
+
+  .po-steps-body {
+    padding: 36px 40px 40px;
+  }
+
+  .po-step-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .po-step-item {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    padding-bottom: 32px;
+  }
+
+  .po-step-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .po-step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 44px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--brand), transparent);
+    opacity: .15;
+  }
+
+  .po-step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-brand);
+    position: relative;
+    z-index: 1;
+  }
+
+  .po-step-content {
+    padding-top: 8px;
+  }
+
+  .po-step-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .po-step-desc {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin: 4px 0 0;
+  }
+
+  /* ─── Mobile Accordion ──────────────────────────────────────── */
+  .po-mob-wrap {
+    display: none;
+  }
+
+  .po-mob-item {
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .po-mob-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background .2s;
+    text-align: left;
+  }
+
+  .po-mob-trigger img {
+    height: 30px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .po-mob-trigger.active {
+    background: var(--brand-lite);
+    color: var(--brand);
+    border-bottom: 1.5px solid var(--border);
+  }
+
+  .po-mob-chevron {
+    margin-left: auto;
+    transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+    flex-shrink: 0;
+    color: var(--ink-4);
+  }
+
+  .po-mob-trigger.active .po-mob-chevron {
+    transform: rotate(180deg);
+    color: var(--brand);
+  }
+
+  .po-mob-body {
+    display: none;
+    padding: 16px;
+    background: var(--surface-2);
+  }
+
+  .po-mob-body.open {
+    display: block;
+  }
+
+  .po-mob-body .po-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* ─── Animations ────────────────────────────────────────────── */
+  @keyframes poFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes poSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .po-steps-screen.visible {
+    animation: poSlideIn .25s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  /* ─── Responsive ────────────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    .po-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (max-width: 991px) {
+    .po-section {
+      padding: 36px 0 48px;
+    }
+
+    .po-tabs {
+      display: none;
+    }
+
+    .po-mob-wrap {
+      display: none;
+    }
+
+    .po-card {
+      display: block;
+    }
+
+    .po-header {
+      margin-bottom: 28px;
+    }
+
+    .po-card-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .po-search {
+      width: 100%;
+    }
+
+    .po-search-wrap {
+      width: 100%;
+    }
+
+    .po-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 14px !important;
+    }
+
+    .po-bank-card {
+      padding: 20px 12px 18px !important;
+    }
+
+    .po-bank-img-wrap {
+      width: 100% !important;
+      height: 130px !important;
+    }
+
+    .po-bank-img-wrap img {
+      max-width: 85% !important;
+      max-height: 100% !important;
+    }
+
+    .po-bank-label {
+      font-size: 14px !important;
+      font-weight: 600;
+    }
+
+    .po-body {
+      padding: 14px;
+      max-height: none;
+    }
+
+    .po-steps-body {
+      padding: 20px 16px 24px;
+    }
+
+    .po-steps-topbar {
+      padding: 14px 16px;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .po-section {
+      padding: 36px 0 48px;
+    }
+
+    .po-tabs {
+      display: none;
+    }
+
+    .po-mob-wrap {
+      display: none;
+    }
+
+    .po-card {
+      display: block;
+    }
+
+    .po-header {
+      margin-bottom: 28px;
+    }
+
+    .po-card-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .po-search {
+      width: 100%;
+    }
+
+    .po-search-wrap {
+      width: 100%;
+    }
+
+    .po-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 14px !important;
+    }
+
+    .po-bank-card {
+      padding: 20px 12px 18px !important;
+    }
+
+    .po-bank-img-wrap {
+      width: 100% !important;
+      height: 130px !important;
+    }
+
+    .po-bank-img-wrap img {
+      max-width: 85% !important;
+      max-height: 100% !important;
+    }
+
+    .po-bank-label {
+      font-size: 14px !important;
+      font-weight: 600;
+    }
+
+    .po-body {
+      padding: 16px;
+      max-height: none;
+    }
+
+    .po-steps-body {
+      padding: 20px 16px 24px;
+    }
+
+    .po-steps-topbar {
+      padding: 14px 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .po-bank-img-wrap {
+      width: 100% !important;
+      height: 110px !important;
+    }
+
+    .po-bank-card {
+      padding: 16px 10px 14px !important;
+    }
+
+    .po-bank-label {
+      font-size: 13px !important;
+    }
+  }
+</style>
+
+<section class="po-section">
+  <div class="po-inner">
+
+    <!-- Header -->
+    <div class="po-header">
+      <img src="https://transworld-home.com/wp-content/themes/transworld-home/images/twh_logo.svg" alt="Transworld Home"
+        class="po-site-logo">
+      <div class="po-eyebrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2" />
+          <line x1="2" y1="10" x2="22" y2="10" />
+        </svg>
+        Flexible Payments
+      </div>
+      <h2 class="po-title">Pay <span>Your Way</span></h2>
+      <p class="po-subtitle">Choose from 20+ banks and digital wallets to pay your bills instantly and securely.</p>
+    </div>
+
+    <!-- Tab Strip (desktop) -->
+    <!-- <div class="po-tabs">
+      <button class="po-tab active" data-po-tab="1link">
+        <img src="https://transworld-home.com/wp-content/uploads/2025/11/1link.png" alt="1LINK">
+        1LINK &amp; 1BILL
+      </button>
+    </div> -->
+
+    <!-- Desktop Card -->
+    <div class="po-card" id="poCard_1link">
+
+      <!-- Bank Logos Screen -->
+      <div id="poBankLogosScreen">
+        <div class="po-card-head">
+          <div class="po-card-brand">
+            <img class="po-card-brand-logo" src="https://transworld-home.com/wp-content/uploads/2025/11/1link.png"
+              alt="1LINK Logo">
+            <div class="po-card-brand-text">
+              <h3>1LINK &amp; 1BILL Banks</h3>
+              <p>Select your bank to view step-by-step payment instructions</p>
+            </div>
+          </div>
+          <div class="po-count-badge" id="poBankCount">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="8" y1="6" x2="21" y2="6" />
+              <line x1="8" y1="12" x2="21" y2="12" />
+              <line x1="8" y1="18" x2="21" y2="18" />
+              <line x1="3" y1="6" x2="3.01" y2="6" />
+              <line x1="3" y1="12" x2="3.01" y2="12" />
+              <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+            21 banks
+          </div>
+          <div class="po-search-wrap">
+            <svg class="po-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.2" stroke-linecap="round">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input type="text" class="po-search" id="poBankSearch" placeholder="Search bank…" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="po-body">
+          <div class="po-grid" id="poBankGrid"></div>
+          <div class="po-empty" id="poEmpty">
+            <div class="po-empty-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </div>
+            <p>No results for &ldquo;<span id="poEmptyQuery"></span>&rdquo;</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps Screen -->
+      <div id="poStepsScreen" class="po-steps-screen">
+        <div class="po-steps-topbar">
+          <button class="po-back-btn" id="poBackBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            All Banks
+          </button>
+          <div class="po-steps-bank-info">
+            <div class="po-steps-bank-logo-wrap">
+              <img id="poStepsBankLogo" src="" alt="">
+            </div>
+            <div class="po-steps-bank-text">
+              <h4 id="poStepsBankName"></h4>
+              <p>How to pay via 1LINK / 1BILL</p>
+            </div>
+          </div>
+        </div>
+        <div class="po-steps-body">
+          <ul class="po-step-list" id="poStepsList"></ul>
+          <!-- Legacy hook kept for external JS compatibility -->
+          <ul id="twacc_bankStepsList" style="display:none;"></ul>
+        </div>
+      </div>
+
+    </div><!-- /.po-card -->
+
+    <!-- Mobile Accordion -->
+    <div class="po-mob-wrap">
+      <div class="po-mob-item">
+        <button class="po-mob-trigger" id="poMobTrigger">
+          <img src="https://transworld-home.com/wp-content/uploads/2025/11/1link.png" alt="1LINK">
+          1LINK &amp; 1BILL — Any Bank
+          <svg class="po-mob-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <div class="po-mob-body" id="poMobBody">
+          <div class="po-grid" id="poMobGrid"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.po-inner -->
+</section>
+
+<script>
+  (function () {
+    var banks = [
+      { name: "Askari Bank", short: "Askari", logo: "https://transworld-home.com/wp-content/uploads/2025/11/askari-bank.png" },
+      { name: "Bank Al Habib", short: "BAHL", logo: "https://transworld-home.com/wp-content/uploads/2025/11/bank-al-habib.png" },
+      { name: "Bank Islami", short: "Bank Islami", logo: "https://transworld-home.com/wp-content/uploads/2025/11/bank-islami.png" },
+      { name: "Bank of Punjab", short: "BoP", logo: "https://transworld-home.com/wp-content/uploads/2025/11/bop-logo.png" },
+      { name: "Bank Alfalah", short: "Alfalah", logo: "https://transworld-home.com/wp-content/uploads/2025/11/aflalah.png" },
+      { name: "Dubai Islamic Bank", short: "DIB", logo: "https://transworld-home.com/wp-content/uploads/2025/11/dubai-islamic-bank.png" },
+      { name: "Faysal Bank", short: "Faysal", logo: "https://transworld-home.com/wp-content/uploads/2025/11/faysal-bank.png" },
+      { name: "HBL", short: "HBL", logo: "https://transworld-home.com/wp-content/uploads/2025/11/hbl.png" },
+      { name: "Habib Metro", short: "Habib Metro", logo: "https://transworld-home.com/wp-content/uploads/2025/11/habibmetro-bank.png" },
+      { name: "JS Bank", short: "JS Bank", logo: "https://transworld-home.com/wp-content/uploads/2025/11/js_bank.png" },
+      { name: "MCB", short: "MCB", logo: "https://transworld-home.com/wp-content/uploads/2025/11/mcb.png" },
+      { name: "Soneri Bank", short: "Soneri", logo: "https://transworld-home.com/wp-content/uploads/2025/11/soneri.png" },
+      { name: "Summit Bank", short: "Summit", logo: "https://transworld-home.com/wp-content/uploads/2025/11/summit-bank.png" },
+      { name: "Standard Chartered", short: "SCB", logo: "https://transworld-home.com/wp-content/uploads/2025/11/standard-chartered.png" },
+      { name: "Silk Bank", short: "Silk", logo: "https://transworld-home.com/wp-content/uploads/2025/11/silk-bank.png" },
+      { name: "NBP", short: "NBP", logo: "https://transworld-home.com/wp-content/uploads/2025/11/nbp.png" },
+      { name: "Meezan Bank", short: "Meezan", logo: "https://transworld-home.com/wp-content/uploads/2025/11/meezan-bank.png" },
+      { name: "UBL", short: "UBL", logo: "https://transworld-home.com/wp-content/uploads/2025/11/ubl.png" },
+      { name: "Allied Bank", short: "Allied", logo: "https://transworld-home.com/wp-content/uploads/2025/11/allied-bank.png" },
+      { name: "Jazz Cash", short: "JazzCash", logo: "https://transworld-home.com/wp-content/uploads/2025/11/jc1.png" },
+      { name: "Easypaisa", short: "Easypaisa", logo: "https://transworld-home.com/wp-content/uploads/2025/11/easypaisa.png" }
+    ];
+
+    function cardHTML(bank, idx) {
+      return '<div class="po-bank-card" data-bank="' + bank.name + '" data-logo="' + bank.logo +
+        '" style="animation-delay:' + (idx * 28) + 'ms">' +
+        '<div class="po-bank-img-wrap"><img src="' + bank.logo + '" alt="' + bank.name + '" loading="lazy"></div>' +
+        '<span class="po-bank-label">' + bank.short + '</span>' +
+        '<div class="po-bank-arrow"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></div>' +
+        '</div>';
+    }
+
+    function renderGrid(container, list) {
+      container.innerHTML = list.map(cardHTML).join('');
+      container.querySelectorAll('.po-bank-card').forEach(function (card) {
+        card.addEventListener('click', function () { openSteps(card.dataset.bank, card.dataset.logo); });
+      });
+    }
+
+    function openSteps(bankName, bankLogo) {
+      document.getElementById('poStepsBankLogo').src = bankLogo;
+      document.getElementById('poStepsBankLogo').alt = bankName;
+      document.getElementById('poStepsBankName').textContent = bankName;
+
+      // Fire legacy event for external JS
+      var legacyCard = document.querySelector('[data-bank="' + bankName + '"]:not(.po-bank-card)');
+      if (legacyCard) legacyCard.click();
+
+      setTimeout(function () {
+        var stepsList = document.getElementById('poStepsList');
+        var legacyList = document.getElementById('twacc_bankStepsList');
+        var items = legacyList ? legacyList.querySelectorAll('li') : [];
+
+        if (items.length) {
+          stepsList.innerHTML = '';
+          items.forEach(function (li, i) {
+            var item = document.createElement('li');
+            item.className = 'po-step-item';
+            item.innerHTML = '<div class="po-step-num">' + (i + 1) + '</div>' +
+              '<div class="po-step-content"><p class="po-step-title">' + li.innerHTML + '</p></div>';
+            stepsList.appendChild(item);
+          });
+        } else {
+          // Bank-specific steps
+          var bankSteps = {
+            "Askari Bank": [
+              '<strong>Bill Payment</strong>.',
+              '<strong>1-Bill (Drag Right)</strong>.',
+              '<strong>Top-up Payment Biller</strong>.',
+              '<strong>+ New Bill</strong>.',
+              'Enter Consumer ID <strong>102370XXXXXXXXXQ</strong>.',
+              'Confirm Details & then Click <strong>Submit</strong>.'
+            ],
+            "Bank Al Habib": [
+              'Click on <strong>Pay Bills Button</strong> ',
+              'Select <strong>Add Biller Option</strong>',
+              'Click on <strong>1-Bill</strong>',
+              'Select <strong>1-Bill – Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Bank Islami": [
+              'Select <strong>Bill payment option</strong> ',
+              'Click on <strong>1-Bill</strong> ',
+              'Select <strong>Top-up</strong> ',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Bank of Punjab": [
+              '<strong>Bill Payments</strong>',
+              '<strong>Add Bill payee</strong>',
+              'Select Category <strong>Top-up</strong> ',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Bank Alfalah": [
+              '<strong>Payments</strong>',
+              '<strong>1-Bill</strong> ',
+              'Scroll Down to <strong>1-Bill Top-up</strong> ',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Dubai Islamic Bank": [
+              'Select <strong>Transfer & Payments</strong>',
+              'Select <strong>payment option</strong> ',
+              'Select <strong>Biller</strong> ',
+              'Click on <strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Faysal Bank": [
+              '<strong>Beneficiary Management</strong> ',
+              '<strong>Payments</strong> ',
+              'Click On <strong>Add Button</strong> ',
+              'Bill type ( <strong>Digital Payments</strong> ) ',
+              'Company Name <strong>Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "HBL": [
+              'Click on <strong>“ More “ Button</strong> ',
+              '<strong>Other Payments</strong> ',
+              'Click on <strong>View more option</strong> ',
+              'Click on <strong>1-Bill Top-up</strong>',
+              'Select company',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Habib Metro": [
+              'Click on <strong>Menu Button</strong> ',
+              'Select <strong>Pay Bill Option</strong> ',
+              'Select <strong>Instant Payment</strong> ',
+              'Select <strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "JS Bank": [
+              'Click on <strong>“Pay”</strong>',
+              '<strong>Corporate Payments</strong> ',
+              'Select <strong>1-Bill Top-up</strong>',
+              'Enter nickname',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "MCB": [
+              'Log into <strong>MCB live App</strong> ',
+              'Click on <strong>“Pay Bills”</strong>',
+              '<strong>Add Biller</strong> ',
+              'Click on <strong>1-Bill</strong>',
+              '<strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Soneri Bank": [
+              'Click on option <strong>Pay</strong> ',
+              'Click on <strong>Pay a Bill option</strong> ',
+              'Select company From The List ',
+              'Click on <strong>1-Bill Top-up</strong>',
+              'Select company <strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Summit Bank": [
+              'Tap to <strong>Move option</strong> ',
+              'Click on <strong>Payment & Transfer</strong> ',
+              'Click on <strong>Payment</strong>',
+              'Select <strong>1Bill</strong>',
+              'Select company name <strong>Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Standard Chartered": [
+              '<strong>Payments</strong>',
+              '<strong>Add Bill Payee</strong>',
+              '<strong>Bill Payee Type (1-Bill)</strong>',
+              '<strong>Bill Payee name Top-up</strong>',
+              'Click on <strong>Pay Bill</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Silk Bank": [
+              'Select <strong>Bill Payments</strong>',
+              'Select <strong>Bill type</strong>',
+              'Click on <strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "NBP": [
+              'Click on <strong>1-Bill Payments</strong>',
+              'Select company <strong>(1-Bill Top-up)</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Meezan Bank": [
+              'Go to <strong>Bill Payments</strong>',
+              '<strong>Add Beneficiary</strong>',
+              'Search <strong>1Bill Top Up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "UBL": [
+              '<strong>Govt & online payments</strong>',
+              '<strong>Online payments</strong>',
+              '<strong>1-Bill Top-up</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm Details & then Click <strong>Submit</strong>'
+
+            ],
+            "Allied Bank": [
+              'Log in to <strong>myABL Mobile App</strong>',
+              '<strong>Payments</strong>',
+              '<strong>New Payments</strong>',
+              '<strong>More Billers</strong>',
+              '<strong>1-Bill Top-up</strong>',
+              '<strong>Others</strong>',
+              'Enter Consumer ID <strong>102370XXXXXXXXX</strong>',
+              'Confirm details & Pay'
+
+
+            ]
+          };
+
+          var steps = bankSteps[bankName] || [
+            'Log in to your <strong>' + bankName + '</strong> mobile banking app.',
+            'Go to <strong>Bill Payments</strong> or <strong>1BILL / 1LINK</strong> in the menu.',
+            'Search for <strong>1-Bill Top-up</strong> in the biller list.',
+            'Enter Consumer ID <strong>102370XXXXXXXXX</strong>.',
+            'Confirm details aur <strong>Submit</strong> karein.'
+          ];
+          stepsList.innerHTML = steps.map(function (s, i) {
+            return '<li class="po-step-item"><div class="po-step-num">' + (i + 1) + '</div>' +
+              '<div class="po-step-content"><p class="po-step-title">' + s + '</p></div></li>';
+          }).join('');
+        }
+      }, 60);
+
+      document.getElementById('poBankLogosScreen').style.display = 'none';
+      var ss = document.getElementById('poStepsScreen');
+      ss.style.display = 'block';
+      ss.classList.add('visible');
+    }
+
+    document.getElementById('poBackBtn').addEventListener('click', function () {
+      var ss = document.getElementById('poStepsScreen');
+      ss.style.display = 'none';
+      ss.classList.remove('visible');
+      document.getElementById('poBankLogosScreen').style.display = '';
+      document.getElementById('poStepsList').innerHTML = '';
+    });
+
+    document.getElementById('poBankSearch').addEventListener('input', function () {
+      var q = this.value.trim().toLowerCase();
+      var grid = document.getElementById('poBankGrid');
+      var empty = document.getElementById('poEmpty');
+      var badge = document.getElementById('poBankCount');
+      var filtered = q ? banks.filter(function (b) {
+        return b.name.toLowerCase().indexOf(q) !== -1 || b.short.toLowerCase().indexOf(q) !== -1;
+      }) : banks;
+
+      badge.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>' +
+        filtered.length + ' bank' + (filtered.length !== 1 ? 's' : '');
+
+      if (filtered.length) {
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
+        renderGrid(grid, filtered);
+      } else {
+        grid.style.display = 'none';
+        empty.style.display = 'flex';
+        document.getElementById('poEmptyQuery').textContent = this.value;
+      }
+    });
+
+    document.getElementById('poMobTrigger').addEventListener('click', function () {
+      this.classList.toggle('active');
+      document.getElementById('poMobBody').classList.toggle('open');
+    });
+
+    renderGrid(document.getElementById('poBankGrid'), banks);
+    renderGrid(document.getElementById('poMobGrid'), banks);
+  })();
+</script>
