@@ -24,3 +24,15 @@ step-by-step 1BILL / 1LINK payment instructions for 21 Pakistani banks.
 
 ## 📁 File Structure
 
+
+## 🏦 Supported Banks (19 with custom steps)
+
+Askari Bank · Bank Al Habib · Bank Islami · Bank of Punjab · Bank Alfalah ·
+Dubai Islamic Bank · Faysal Bank · HBL · Habib Metro · JS Bank · MCB ·
+Soneri Bank · Summit Bank · Standard Chartered · Silk Bank · NBP ·
+Meezan Bank · UBL · Allied Bank · Jazz Cash · Easypaisa
+
+## 🔧 How to Use
+
+Simply drop `index.html` into any webpage or WordPress theme — no build 
+process required. The widget is fully standalone.
